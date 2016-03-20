@@ -1,4 +1,6 @@
-# alsong-lyrics-parser
+# alsong-lyrics-parser 
+[![Code Climate](https://codeclimate.com/github/Dogdriip/alsong-lyrics-parser/badges/gpa.svg)](https://codeclimate.com/github/Dogdriip/alsong-lyrics-parser)
+
 알송 가사를 파싱해오는 간단한 모듈입니다. [Ruby 프로그래밍 언어](https://github.com/ruby/ruby)로 작성되었습니다.
 
 ## 사용법

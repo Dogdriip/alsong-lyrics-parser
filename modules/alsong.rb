@@ -7,8 +7,25 @@ require 'json'
 
 module Alsong
   $alsong_uri = URI.parse 'http://lyrics.alsong.co.kr/alsongwebservice/service1.asmx'
-  def Alsong.get_lyrics title, artist
-    xml_string = '<?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="ALSongWebServer/Service1Soap" xmlns:ns1="ALSongWebServer" xmlns:ns3="ALSongWebServer/Service1Soap12"><SOAP-ENV:Body><ns1:GetResembleLyric2><ns1:stQuery><ns1:strTitle>' + title + '</ns1:strTitle><ns1:strArtistName>' + artist + '</ns1:strArtistName><ns1:nCurPage>0</ns1:nCurPage></ns1:stQuery></ns1:GetResembleLyric2></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+  def Alsong.get_lyrics title, artist=" "
+    xml_string = '<?xml version="1.0" encoding="UTF-8"?>' + 
+                 '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope" ' + 
+                                    'xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding" ' + 
+                                    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' + 
+                                    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' + 
+                                    'xmlns:ns2="ALSongWebServer/Service1Soap" ' + 
+                                    'xmlns:ns1="ALSongWebServer" ' + 
+                                    'xmlns:ns3="ALSongWebServer/Service1Soap12">' + 
+                    '<SOAP-ENV:Body>' + 
+                      '<ns1:GetResembleLyric2>' + 
+                        '<ns1:stQuery>' + 
+                          '<ns1:strTitle>' + title + '</ns1:strTitle>' + 
+                          '<ns1:strArtistName>' + artist + '</ns1:strArtistName>' + 
+                          '<ns1:nCurPage>0</ns1:nCurPage>' + 
+                        '</ns1:stQuery>' + 
+                      '</ns1:GetResembleLyric2>' + 
+                    '</SOAP-ENV:Body>' + 
+                  '</SOAP-ENV:Envelope>'
     req = Net::HTTP::Post.new $alsong_uri.request_uri
     # Content-Type := type "/" subtype *[";" parameter] 
     req.content_type = "text/xml;charset=utf-8"
@@ -38,15 +55,15 @@ module Alsong
           lyric_text = lyric.split(']')[1].split('&')[0]
           lyric_arr = {"time" => lyric_time, "text" => lyric_text.force_encoding('UTF-8')}
           resarr.push lyric_arr
-#         puts lyric_time_ + " / " + i.to_s
+          # puts lyric_time_ + " / " + i.to_s
         end
         return resarr.to_json
       else
-        raise "Cannot post"
+        raise "Cannot send POST request"
       end
     rescue Exception => e
-      return "Error occured at #{e.backtrace.inspect}: #{e.message}"
+      return "Exception occured at #{e.backtrace.inspect}: #{e.message}"
     end
-#   return res.body
+    # return res.body
   end
 end

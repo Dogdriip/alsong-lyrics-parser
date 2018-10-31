@@ -1,3 +1,3 @@
 require '../modules/alsong'
 
-puts Alsong.get_lyrics("ケロ⑨destiny", " ")
+puts Alsong.get_lyrics "ケロ⑨destiny"

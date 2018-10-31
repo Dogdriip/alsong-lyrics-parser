@@ -8,18 +8,18 @@ alsong.rb 모듈을 require하여 사용할 수 있습니다.
 ```
 require '../modules/alsong'
 ```
-## Alsong.get_lyrics(title, artist)
+## Alsong.get_lyrics(title, artist=" ")
 가사를 검색하여 곡 정보와 함께 json 형식으로 돌려줍니다.
 
 * title: 가사를 검색하려는 노래의 제목
-* artist: 가사를 검색하려는 노래의 아티스트
+* artist: 가사를 검색하려는 노래의 아티스트 (기본값: " ")
 
 예제:
 ```ruby 
-puts Alsong.get_lyrics "ケロ⑨destiny", " "
-puts Alsong.get_lyrics "Never gonna give you up", "Rick Astley"
+puts Alsong.get_lyrics "ケロ⑨destiny"
+puts Alsong.get_lyrics "ベースラインやってる？笑", "ななひら"
 ```
-> 정확한 아티스트 명을 모를 때에는 공백으로 전달해도 됩니다.
+> 정확한 아티스트 명을 모를 때에는 artist 인자를 전달하지 않아도 됩니다.
 
 json 반환 예제:
 ```json
@@ -32,6 +32,7 @@ json 반환 예제:
 * 시간을 ms로 변환하여 반환
 * 같은 시간에 할당된 가사들 (최대 3줄?) 합쳐서 반환
 * json 외의 다른 형식으로 반환하는 함수 추가
+* 에러핸들링...언제...해...
 
 ## 참고
 * 알송 (http://www.altools.co.kr/Brand/Alsong/)

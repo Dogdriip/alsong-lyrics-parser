@@ -4,9 +4,9 @@
 알송 가사를 파싱해오는 간단한 모듈입니다. [Ruby 프로그래밍 언어](https://github.com/ruby/ruby)로 작성되었습니다.
 
 ## 사용법
-alsong.rb 모듈을 require하여 사용할 수 있습니다.
+alsong 모듈을 require하여 사용할 수 있습니다.
 ```
-require '../modules/alsong'
+require_relative 'modules/alsong'
 ```
 ## Alsong.get_lyrics(title, artist=" ")
 가사를 검색하여 곡 정보와 함께 json 형식으로 돌려줍니다.
